@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-jupyterhub
+  namespace: jupyterhub
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+  - hosts:
+    - lab.stouffcapital.com
+    secretName: lab-stouffcapital-service-tls
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
+  rules:
+  - host: lab.stouffcapital.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: proxy-public
+          servicePort: 80
