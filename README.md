@@ -2,10 +2,15 @@
 
 based on http://zero-to-jupyterhub.readthedocs.io/en/latest/index.html
 
-`helm install jupyterhub/jupyterhub --version=v0.5 --name=jupyterhub --namespace=jupyterhub -f config.yaml --timeout=10000`
+
+## build jupyterhub docker image (py3 with tensorflow, py2, pyspark, scala, R)
+
+`docker build -t gchevalley/jupyterhub:c7fb6660d096 .`
 
 
-## `config.yaml`
+## deploy with helm
+
+### `config.yaml`
 
 ```
 hub:
@@ -45,4 +50,9 @@ auth:
     - "read:user"
 
 ```
+
+`helm install jupyterhub/jupyterhub --version=v0.5 --name=jupyterhub --namespace=jupyterhub -f config.yaml --timeout=10000`
+
+`watch kubectl --namespace=jupyterhub get po`
+
 
