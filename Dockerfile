@@ -40,6 +40,7 @@ RUN $CONDA_DIR/envs/python2/bin/python \
     kernel install
 
 
+
 USER $NB_UID
 
 # Install python 3 packages

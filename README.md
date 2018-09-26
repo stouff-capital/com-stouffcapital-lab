@@ -25,7 +25,7 @@ hub:
 
 singleuser:
   image:
-    name: jupyter/all-spark-notebook
+    name: gchevalley/jupyterhub
     tag: c7fb6660d096
   storage:
     type: dynamic
